@@ -11,6 +11,9 @@ Plugin 'VundleVim/Vundle.vim'
 " ==== plugin vim-slime
 Plugin 'jpalardy/vim-slime'
 
+" ==== plugin vim-table-mode
+Plugin 'dhruvasagar/vim-table-mode'
+
 " ==== helpers
 Plugin 'vim-scripts/L9'
 
@@ -132,6 +135,17 @@ set shortmess+=A
 command! JsonPretty execute ":%!python -m json.tool"
 set secure
 
-autocmd FileType python nnoremap <buffer> <F9> :update<bar>!python %<CR>
 
+:let maplocalleader = "\\"
+let g:slime_target = "tmux"
 
+:inoremap jk <esc>
+augroup filetype_all
+    autocmd!
+    autocmd BufWritePre,BufRead *.html :normal gg=G
+"    autocmd BufWritePre,BufRead *.py :normal gg=G
+    autocmd FileType python nnoremap <buffer> \\c I#<esc>
+    autocmd FileType javascript nnoremap <buffer> \\c I//<esc>
+augroup END
+
+:set hlsearch incsearch
