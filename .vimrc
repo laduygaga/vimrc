@@ -1,7 +1,7 @@
 set nocompatible  " be iMproved, required
 filetype off  " required
 set exrc
-
+set encoding=UTF-8
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -55,7 +55,7 @@ call vundle#end()
 filetype plugin indent on
 
 " ==== Colors and other basic settings
-colorscheme gruvbox
+"colorscheme gruvbox
 set guifont=Monospace\ 10
 set fillchars+=vert:\$
 syntax enable
@@ -73,7 +73,7 @@ let &colorcolumn="80"
 :set guioptions-=T  "remove toolbar
 :set guioptions-=r  "remove right-hand scroll bar
 :set guioptions-=L  "remove left-hand scroll bar
-:set lines=999 columns=999
+":set lines=999 columns=999
 
 " ==== NERDTREE
 let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*$', '[a-zA-Z]*egg[a-zA-Z]*', '.DS_Store']
@@ -142,10 +142,12 @@ let g:slime_target = "tmux"
 :inoremap jk <esc>
 augroup filetype_all
     autocmd!
-    autocmd BufWritePre,BufRead *.html :normal gg=G
+"    autocmd BufWritePre,BufRead *.html :normal gg=G
 "    autocmd BufWritePre,BufRead *.py :normal gg=G
     autocmd FileType python nnoremap <buffer> \\c I#<esc>
     autocmd FileType javascript nnoremap <buffer> \\c I//<esc>
 augroup END
 
 :set hlsearch incsearch
+:nnoremap <C-l> ggVGd
+:nnoremap <C-a> ggVG
