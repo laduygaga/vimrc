@@ -144,7 +144,7 @@ augroup filetype_all
     autocmd!
 "    autocmd BufWritePre,BufRead *.html :normal gg=G
 "    autocmd BufWritePre,BufRead *.py :normal gg=G
-    autocmd FileType python nnoremap <buffer> \\c I#<esc>
+    autocmd FileType python nnoremap <buffer> \\c I# <esc>
     autocmd FileType javascript nnoremap <buffer> \\c I//<esc>
 augroup END
 
