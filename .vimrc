@@ -62,7 +62,7 @@ syntax enable
 set background=dark
 set ruler
 set hidden
-set number
+set number relativenumber
 set laststatus=2
 set smartindent
 set st=4 sw=4 et
@@ -151,3 +151,6 @@ augroup END
 :set hlsearch incsearch
 :nnoremap <C-l> ggVGd
 :nnoremap <C-a> ggVG
+
+autocmd Filetype python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+"imap <F5> <Esc>:w<CR>:!clear;python %<CR>
