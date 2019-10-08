@@ -47,9 +47,13 @@ Plugin 'SirVer/ultisnips'
 
 " Status bar on bottom
 Plugin 'bling/vim-airline'
-
+"===== Delay srt(sub)
+Plugin 'pamacs/vim-srt-sync'
 " ==== PLUGIN THEMES
 Plugin 'morhetz/gruvbox'
+
+"===== PYTHON-MODE
+"Plugin 'klen/python-mode'
 
 call vundle#end()
 filetype plugin indent on
@@ -93,7 +97,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_mri_args = "--config=$HOME/.jshintrc"
-let g:syntastic_python_checkers = [ 'pylint', 'flake8', 'pep8', 'pyflakes', 'python3']
+"let g:syntastic_python_checkers = [ 'pylint', 'flake8', 'pep8', 'pyflakes', 'python3']
 let g:syntastic_yaml_checkers = ['jsyaml']
 let g:syntastic_html_tidy_exec = 'tidy5'
 
@@ -149,8 +153,14 @@ augroup filetype_all
 augroup END
 
 :set hlsearch incsearch
-:nnoremap <C-l> ggVGd
-:nnoremap <C-a> ggVG
+:inoremap <C-l> <esc>ggVGd
+:nnoremap <C-l> <esc>ggVGd
+:inoremap <C-a> <esc>ggVG
 
-autocmd Filetype python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
-"imap <F5> <Esc>:w<CR>:!clear;python %<CR>
+"autocmd Filetype python nnoremap <buffer> <F9> exec '!python' shellescape(@%, 1)<cr>
+autocmd Filetype python inoremap <F9> <Esc>:w<CR>:!clear;python %<CR>
+autocmd Filetype python nnoremap <F9> <Esc>:w<CR>:!clear;python %<CR>
+:hi CursorLineNr term=none cterm=none ctermfg=202 guifg=Orange
+:set cursorcolumn
+:set cursorline
+:set nrformats-=octal
