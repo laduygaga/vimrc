@@ -16,6 +16,9 @@ Plugin 'dhruvasagar/vim-table-mode'
 
 " ==== helpers
 Plugin 'vim-scripts/L9'
+" ==== excel
+Plugin  'vim-scripts/excel.vim'
+let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
 
 " ==== File tree
 Plugin 'scrooloose/nerdtree'
@@ -49,6 +52,8 @@ Plugin 'SirVer/ultisnips'
 Plugin 'bling/vim-airline'
 "===== Delay srt(sub)
 Plugin 'pamacs/vim-srt-sync'
+"Usage :DelaySrt [delay time in milliseconds or timecode format (HH:MM:SS,MIL)]
+
 " ==== PLUGIN THEMES
 Plugin 'morhetz/gruvbox'
 
@@ -66,7 +71,7 @@ syntax enable
 set background=dark
 set ruler
 set hidden
-set number relativenumber
+set number
 set laststatus=2
 set smartindent
 set st=4 sw=4 et
@@ -146,8 +151,8 @@ let g:slime_target = "tmux"
 :inoremap jk <esc>
 augroup filetype_all
     autocmd!
-"    autocmd BufWritePre,BufRead *.html :normal gg=G
-"    autocmd BufWritePre,BufRead *.py :normal gg=G
+    "    autocmd BufWritePre,BufRead *.html :normal gg=G
+    "    autocmd BufWritePre,BufRead *.py :normal gg=G
     autocmd FileType python nnoremap <buffer> \\c I# <esc>
     autocmd FileType javascript nnoremap <buffer> \\c I//<esc>
 augroup END
@@ -161,6 +166,24 @@ augroup END
 autocmd Filetype python inoremap <F9> <Esc>:w<CR>:!clear;python %<CR>
 autocmd Filetype python nnoremap <F9> <Esc>:w<CR>:!clear;python %<CR>
 :hi CursorLineNr term=none cterm=none ctermfg=202 guifg=Orange
-:set cursorcolumn
-:set cursorline
-:set nrformats-=octal
+":set cursorcolumn
+":set cursorline
+:set nrformats-=octal "fix when <c-a> auto add 07 to 10
+
+" Protect large files from sourcing and other overhead.
+" Files become read only
+if !exists("my_auto_commands_loaded")
+    let my_auto_commands_loaded = 1
+    " Large files are > 10M
+    " Set options:
+    " eventignore+=FileType (no syntax highlighting etc
+    " assumes FileType always on)
+    " noswapfile (save copy of file)
+    " bufhidden=unload (save memory when other file is viewed)
+    " buftype=nowrite (file is read-only)
+    " undolevels=-1 (no undo possible)
+    let g:LargeFile = 1024 * 1024 * 10
+    augroup LargeFile
+        autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 | else | set eventignore-=FileType | endif
+    augroup END
+endif
