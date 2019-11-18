@@ -17,7 +17,7 @@ Plugin 'dhruvasagar/vim-table-mode'
 " ==== helpers
 Plugin 'vim-scripts/L9'
 " ==== excel
-Plugin  'vim-scripts/excel.vim'
+"Plugin  'vim-scripts/excel.vim'
 let g:zipPlugin_ext = '*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docx,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
 
 " ==== File tree
